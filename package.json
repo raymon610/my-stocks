@@ -1,8 +1,8 @@
 {
-  "name": "my-stock",
+  "name": "my-stocks",
   "version": "0.0.1",
   "author": "",
-  "description": "user defined stock",
+  "description": "user defined stocks",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "my-stock",
+    "productName": "my-stocks",
     "appId": "com.example.yourapp",
     "directories": {
       "output": "build"
