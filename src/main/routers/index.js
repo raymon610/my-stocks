@@ -1944,7 +1944,7 @@ router.get('/user/update', (req, res, next) => {
 
 
 //获取stock信息
-router.get('/', (req, res, next) => {
+router.get('/query', (req, res, next) => {
     const cookie = req.get("Cookie") ? req.get("Cookie") : "";
     createWebAPIRequest(
         "qt.gtimg.cn",

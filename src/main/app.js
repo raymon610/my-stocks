@@ -7,6 +7,8 @@ let cache = apicache.middleware;
 
 // 跨域设置
 app.all("*", function(req, res, next) {
+
+  console.log("跨域设置。。。。1111111111");
   if (req.path !== "/" && !req.path.includes(".")) {
     res.header("Access-Control-Allow-Credentials", true);
     // 这里获取 origin 请求头 而不是用 *

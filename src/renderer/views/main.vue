@@ -5,26 +5,23 @@
                 <el-aside width="230px" class="aside">
                     <aside-view />
                 </el-aside>
-                <!-- <el-container >
-                    <el-header class="header" height="50px" style="-webkit-app-region: drag">
-
+                <el-container >
+                    <el-header class="header" height="42px" style="-webkit-app-region: drag">
+                        <header-view height="42px" />
                     </el-header>
-
-                </el-container> -->
-                <!-- <iframe id="stockView" class="ifmPanel" scrolling="no" src="http://localhost:9080/sh600446/gp" width="787" height="567" frameborder="0"></iframe> -->
-                <!--<playlist/>-->
-                <stock-view></stock-view>
+                    <stock-view></stock-view>
+                </el-container>
             </el-container>
             <el-footer class="footer" height="70px">
-88
             </el-footer>
         </el-container>
     </div>
 </template>
 <script>
     import AsideView from '../components/Aside/'
+    import HeaderView from '../components/Header/'
     import StockView from '../components/Stock/'
-    // import HeaderView from '../components/Header/'
+  
     // import FooterView from '../components/Footer/'
     // import LoginView from '../components/Login/'
     // import Playlist from '../components/Playlist/'
@@ -37,8 +34,9 @@
         },
         components: {
             AsideView
+            ,HeaderView
             ,StockView
-            // ,HeaderView,
+             
             // FooterView,
             // LoginView,
             // Playlist
@@ -57,7 +55,7 @@
     }
 
     .header {
-        background: #fafafa;
+        background: #C62F2F;
     }
 
     .main {

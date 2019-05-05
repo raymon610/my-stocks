@@ -9,5 +9,5 @@ export function login(phone, password) {
 export function getStockInfo(stocks) {
     stocks = Array.isArray(stocks) ? stocks.join(',') : stocks;
     console.log("查询的参数:"+stocks)
-    return http.get('?q='+stocks)
+    return http.get('/query?q='+stocks+"&t="+new Date()/1);
 }

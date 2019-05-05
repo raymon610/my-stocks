@@ -35,13 +35,17 @@ function createWindow() {
 
     // 跨域设置
     app.all("*", function(req, res, next) {
+
+        console.log("跨域设置。。。。22222222222222222222");
         if (req.path !== "/" && !req.path.includes(".")) {
             res.header("Access-Control-Allow-Credentials", true);
             // 这里获取 origin 请求头 而不是用 *
             res.header("Access-Control-Allow-Origin", req.headers["origin"] || "*");
             res.header("Access-Control-Allow-Headers", "X-Requested-With");
             res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-            res.header("Content-Type", "application/json;charset=utf-8");
+            // res.header("Content-Type", "application/json;charset=utf-8");
+            // res.header("Content-Encoding", "gzip");
+            res.header("Content-Type", "text/html; charset=GBK")
         }
         next();
     });
@@ -63,7 +67,7 @@ function createWindow() {
     app.use('/', routes);
     const port = 3000;
     app.listen(port, () => {
-        console.log(`server running @ http://localhost:${port}`);
+        console.log(`server running 22222@ http://localhost:${port}`);
     });
     //express();
     /**
@@ -72,7 +76,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         height: 800,
         useContentSize: true,
-        width: 1200,
+        width: 1000,
         frame: false,
         resizable: false,
         skipTaskbar: false,

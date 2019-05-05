@@ -23,6 +23,7 @@
 import { getStockInfo } from '../../api/index'
 import { addPreFix } from '../../../main/util/util'
 
+
 export default {
     data() {
         return {
@@ -46,9 +47,10 @@ export default {
             this.myStocks.forEach(stock=>{
                 args.push(addPreFix(stock));
             })
-            getStockInfo(args).then(res => {
-                console.log("返回对象：", res);
-                this.list = res.tags
+            getStockInfo(args).then(data => {
+                
+                console.log(decodeURIComponent(data));
+                this.list = data.tags
             })
         }
 
@@ -106,7 +108,7 @@ export default {
     overflow: hidden;
     font-size: 13px;
     .stock-list{
-        padding:0 5px;
+        padding:0;
         li{
             list-style:none;
             span{
@@ -115,7 +117,7 @@ export default {
             }
         }
         .title{
-            background-color: #cccccc;
+            border-bottom: 1px solid #cccccc;
             height: 30px;
             line-height: 30px;
             .item1,

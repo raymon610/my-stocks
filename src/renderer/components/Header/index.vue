@@ -11,9 +11,9 @@
                 <i class="btn el-icon-refresh"></i>
             </el-button>
 
-            <div class="search no-drag">
+            <!-- <div class="search no-drag">
                 <el-input size="mini" prefix-icon="el-icon-search" placeholder="搜索音乐、MV、歌单、用户"></el-input>
-            </div>
+            </div> -->
         </div>
         <div class="right">
             <el-button @click="minimize" class="no-drag" size="mini" type="text">
@@ -32,12 +32,12 @@
         props: {
             height: {
                 type: String,
-                default: '40px'
+                default: '42px'
             }
         },
         methods: {
             close() {
-                this.$confirm('此操作将退出土狗云音乐, 是否继续?', '提示', {
+                this.$confirm('此操作将我的股票, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
@@ -95,7 +95,7 @@
         .right {
             .btn {
                 font-size: 17px;
-                color: #333;
+                color: #fff;
             }
             .btn:hover {
                 color: #31c27c;

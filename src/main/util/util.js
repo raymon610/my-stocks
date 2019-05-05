@@ -31,9 +31,9 @@ function randomUserAgent() {
 }
 
 
-let u_URL = "http://qt.gtimg.cn";
-let u_Referer = "http://qqweb.gu.qq.com/?ADUIN=190968932&ADSESSION=1555030467&ADTAG=CLIENT.QQ.5599_Appbox.0&ADPUBNO=26866";
-let u_Host = "qt.gtimg.cn";
+// let u_URL = "http://qt.gtimg.cn";
+// let u_Referer = "http://qqweb.gu.qq.com/?ADUIN=190968932&ADSESSION=1555030467&ADTAG=CLIENT.QQ.5599_Appbox.0&ADPUBNO=26866";
+// let u_Host = "qt.gtimg.cn";
 
 
 function createWebAPIRequest(
@@ -60,16 +60,21 @@ function createWebAPIRequest(
       //"Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",
       Connection: "keep-alive",
       //"Content-Type": "application/x-www-form-urlencoded",
-      Referer: u_Referer,
-      Host: u_Host,
+      // Referer: u_Referer,
+      Host: host,
       //Cookie: cookie,
-      "User-Agent": randomUserAgent()
+      "User-Agent": randomUserAgent(),
+      charset: 'gbk',
+      gzip:true,
+      "Content-Encoding": "gzip"
     },
-    body: querystring.stringify({
-      params: cryptoreq.params,
-      encSecKey: cryptoreq.encSecKey
-    }),
-    proxy: proxy
+    gzip:true
+    // body: querystring.stringify({
+    //   params: cryptoreq.params,
+    //   encSecKey: cryptoreq.encSecKey
+    // }),
+    // proxy: proxy,
+    
   };
   console.log(
     `[request] ${options.method} ${options.url} proxy:${options.proxy}`
@@ -94,10 +99,10 @@ function createWebAPIRequest(
   });
 }
 
-function createRequest(path, method, data) {
+function createRequest(host, path, method, data) {
   return new Promise((resolve, reject) => {
     const options = {
-      url: u_URL +`/${path}`,
+      url: `http://${host}${path}`,
       method: method,
       headers: {
         Referer: u_Referer,

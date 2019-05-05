@@ -1,11 +1,11 @@
 <template>
-    <el-scrollbar class="stock-detail-view scroll-page">
+    <!-- <el-scrollbar class="stock-detail-view scroll-page"> -->
         <!-- <transition name="fade" mode="out-in"> -->
             <iframe id="stockView" class="ifmPanel" @load="showOnlyChart" scrolling="no" 
             :src="getURL" width="787" height="567" frameborder="0"></iframe>
             <!-- <div class="mask-msg" v-if="!isChildReady">加载中...</div> -->
         <!-- </transition> -->
-    </el-scrollbar>
+    <!-- </el-scrollbar> -->
 </template>
 <script>
 import { addPreFix } from '../../../main/util/util'
@@ -42,7 +42,7 @@ export default {
     },
     computed: {
         getURL() {
-            return 'http://localhost:9080/'+this.$store.state.stock.currCode+'/gp'
+            return 'http://localhost:9080/'+this.$store.state.stock.currCode+'/gp?t='+new Date()/1
         }
     }
 }
@@ -54,6 +54,10 @@ export default {
         overflow: hidden;
         width: 787px;
         height: 567px;
+    }
+
+    .stock-detail-view{
+        overflow: hidden;
     }
 
     .mask-msg{

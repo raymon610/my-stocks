@@ -1,16 +1,21 @@
 <template>
     <div class="wrap">
-        <user-info/>
+        <myTitle/>
+        <selecter/>
         <stockList/>
     </div>
 </template>
 <script>
-import UserInfo from './UserInfo'
+// import UserInfo from './UserInfo'
+import myTitle from './myTitle'
+import selecter from './selecter'
 // import menus from './menu'
 import stockList from './stockList'
 export default {
     components: {
-        UserInfo,
+        // UserInfo,
+        myTitle,
+        selecter,
         // menus,
         stockList
     }
