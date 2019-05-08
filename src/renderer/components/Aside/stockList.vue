@@ -12,7 +12,7 @@
                 <span class="item1">{{stock.SECU_NAME}}</span>
                 <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.CURRENT_PRICE}}</span>
                 <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.DIFF_PRICE}}</span>
-                <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.DIFF_RATE}}</span>
+                <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.DIFF_RATE}}%</span>
             </li>
         </div>
 
@@ -28,10 +28,9 @@ export default {
     data() {
         return {
             myStocks:[
-                '600516','600446'
+                '000718','600516','600446', '002024'
             ],
-            //list: [],
-            playlists: []
+            dataVal: []
         }
     },
     mounted() {
@@ -40,56 +39,36 @@ export default {
     methods: {
         //查看股票当前的详细信息
         viewDetail: function(stock){
-            this.$store.state.stock.currCode = addPreFix(stock.SECU_CODE);
+            this.$store.state.stock.currCode = addPreFix(stock.SECU_CODE)
         },
         getStockDetail() {
             const args = [];
             this.myStocks.forEach(stock=>{
-                args.push(addPreFix(stock));
+                args.push(addPreFix(stock))
             })
+            //获取股票列表的简要信息
             getStockInfo(args).then(data => {
-                
-                console.log(decodeURIComponent(data));
-                this.list = data.tags
+                data = data.split(';')
+                this.dataVal = data.slice(0, data.length-1)
             })
         }
-
     },
-    // computed: {
-    //     list: function(){
-    //         return this.myStocks;
-    //     }
-    // }
-
     computed: {
         list: function(){
-            return [
-                {
-                    'SECU_NAME': '方大碳素',
-                    'SECU_CODE': '600516',
-                    'CURRENT_PRICE': '12.56',
-                    'DIFF_PRICE': '-0.25',
-                    'DIFF_RATE': '1.22%'
-                },
-                {
-                    'SECU_NAME': '金证股份',
-                    'SECU_CODE': '600446',
-                    'CURRENT_PRICE': '30.50',
-                    'DIFF_PRICE': 0.47,
-                    'DIFF_RATE': '1.15%'
-                }
-            ]
-
-            // const args = [];
-            // console.log(this.myStocks);
-            // this.myStocks.forEach(stock=>{
-            //     args.push({
-            //         SECU_NAME: "金证股份",
-            //         SECU_CODE: addPreFix(stock)
-            //     });
-            // });
-            // console.log(args);
-            // return args;
+            let result = [];
+            //按字符串格式解析股票信息
+            this.dataVal.forEach((element, index) => {
+                //v_s_sz000718="51~苏宁环球~000718~3.59~0.04~1.13~108471~3885~~108.94"
+                let item = {};
+                let elArray = element.split('~');
+                item.SECU_NAME= elArray[1];
+                item.SECU_CODE = elArray[2];
+                item.CURRENT_PRICE = elArray[3];
+                item.DIFF_PRICE = elArray[4];
+                item.DIFF_RATE = elArray[5];
+                result.push(item);
+            });
+            return result;
         }
     }
 }

@@ -1,5 +1,4 @@
 import axios from 'axios'
-var Iconv = require('iconv-lite');
 import {
     Message
 } from 'element-ui';
@@ -7,7 +6,6 @@ import {
 const service = axios.create({
     withCredentials: true,
     baseURL: 'http://localhost:3000',
-    // baseURL: 'http://qt.gtimg.cn',
     timeout: 15000 // 请求超时时间
 })
 
@@ -21,11 +19,8 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
     response => {
+        //状态正常直接返回
         if(response.status === 200 && response.statusText === 'OK'){
-            console.log("1=", Iconv.decode(response.data, 'utf8').toString());
-            console.log("2=", Iconv.decode(response.data, 'GBK').toString());
-            console.log("3=", Iconv.decode(response.data, 'gb2312').toString());
-            // return Promise.resolve(Iconv.decode(response.data, 'utf-8').toString())
             return Promise.resolve(response.data)
         }
 

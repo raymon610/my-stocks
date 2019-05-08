@@ -30,7 +30,6 @@ function randomUserAgent() {
   return userAgentList[num];
 }
 
-
 // let u_URL = "http://qt.gtimg.cn";
 // let u_Referer = "http://qqweb.gu.qq.com/?ADUIN=190968932&ADSESSION=1555030467&ADTAG=CLIENT.QQ.5599_Appbox.0&ADPUBNO=26866";
 // let u_Host = "qt.gtimg.cn";
@@ -64,11 +63,8 @@ function createWebAPIRequest(
       Host: host,
       //Cookie: cookie,
       "User-Agent": randomUserAgent(),
-      charset: 'gbk',
-      gzip:true,
-      "Content-Encoding": "gzip"
-    },
-    gzip:true
+    }
+    ,encoding: null
     // body: querystring.stringify({
     //   params: cryptoreq.params,
     //   encSecKey: cryptoreq.encSecKey
@@ -79,7 +75,7 @@ function createWebAPIRequest(
   console.log(
     `[request] ${options.method} ${options.url} proxy:${options.proxy}`
   );
-
+console.log("==========",options);
   request(options, function(error, res, body) {
     if (error) {
       console.error(error);
@@ -135,9 +131,16 @@ var addPreFix = function(code){
   return "sz"+code;
 };
 
+// 解码
+function decodeUnicode(str) {
+  str = str.replace(/\\/g, "%");
+  return unescape(str);
+}
+
 export {
   request,
   createWebAPIRequest,
   createRequest,
-    addPreFix
+  addPreFix,
+  decodeUnicode
 };
