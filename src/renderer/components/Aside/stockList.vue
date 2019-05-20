@@ -9,7 +9,7 @@
             </li>
 
             <li class="item" v-for="(stock,index) in list" :key="index"  @click="viewDetail(stock)">
-                <span class="item1">{{stock.SECU_NAME}}</span>
+                <span class="item1" :title="stock.SECU_CODE">{{stock.SECU_NAME}}</span>
                 <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.CURRENT_PRICE}}</span>
                 <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.DIFF_PRICE}}</span>
                 <span class="item2" :class="stock.DIFF_PRICE>0 ? 'rise' : 'fall'">{{stock.DIFF_RATE}}%</span>
@@ -22,34 +22,47 @@
 <script>
 import { getStockInfo } from '../../api/index'
 import { addPreFix } from '../../../main/util/util'
-
+//import { fetchStock } from '../../api/db'
 
 export default {
     data() {
         return {
             myStocks:[
-                '000718','600516','600446', '002024'
+                '000718','600516','600446','600570','603383','002024'
             ],
+            num: 1,
             dataVal: []
         }
     },
     mounted() {
         this.getStockDetail()
+
+        
     },
     methods: {
+        getStockList: function(){
+            //fetchStock()
+        },
         //查看股票当前的详细信息
         viewDetail: function(stock){
             this.$store.state.stock.currCode = addPreFix(stock.SECU_CODE)
         },
         getStockDetail() {
+            const that = this;
             const args = [];
-            this.myStocks.forEach(stock=>{
+            that.myStocks.forEach(stock=>{
                 args.push(addPreFix(stock))
             })
             //获取股票列表的简要信息
             getStockInfo(args).then(data => {
                 data = data.split(';')
-                this.dataVal = data.slice(0, data.length-1)
+                that.dataVal = data.slice(0, data.length-1)
+
+                that.timeOut && clearTimeout(that.timeOut);
+                that.timeOut = setTimeout(() => {
+                    console.log("重复"+ (that.num++));
+                    that.getStockDetail();
+                }, 3000);
             })
         }
     },
