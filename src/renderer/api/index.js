@@ -28,3 +28,18 @@ export function getStockInfo(stocks) {
     console.log("查询的参数:"+s)
     return http.get('/getStockInfo?q='+s);
 }
+
+export function test(){
+    http.get("aip/client/test").then((response => {
+        let res = response.data
+        if (res) {
+          this.$message({
+            type: 'success',
+            message: '创建成功'
+          })
+          this.$router.push('/')
+        }
+      })).catch(err => {
+        console.log(err)
+      });
+}

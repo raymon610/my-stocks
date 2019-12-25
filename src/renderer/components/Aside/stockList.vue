@@ -20,38 +20,44 @@
 </template>
 
 <script>
-import { getStockInfo } from '../../api/index'
+import { getStockInfo,test } from '../../api/index'
 import { addPreFix } from '../../../main/util/util'
-//import { fetchStock } from '../../api/db'
+import { addStock, fetchStock, getStocksCount, delStocks } from '../../api/db'
+
 
 export default {
     data() {
         return {
-            myStocks:[
-                '000718','600516','600446','600570','603383','002024'
-            ],
+            // myStocks:[
+            //     '000718','600516','600446','600570','603383','002024'
+            // ],
             num: 1,
             dataVal: []
         }
     },
     mounted() {
-        this.getStockDetail()
+        var that = this;
+        //获取已有的股票
+        fetchStock.apply(this).then(function(stocks){
+            console.log("获取到已有的股票：", stocks);
+            that.getStockDetail(stocks)
+        });
 
-        
+        test()
     },
     methods: {
         getStockList: function(){
-            //fetchStock()
+            // fetchStock.apply(this);
         },
         //查看股票当前的详细信息
         viewDetail: function(stock){
             this.$store.state.stock.currCode = addPreFix(stock.SECU_CODE)
         },
-        getStockDetail() {
+        getStockDetail(stocks) {
             const that = this;
             const args = [];
-            that.myStocks.forEach(stock=>{
-                args.push(addPreFix(stock))
+            stocks.forEach(stock=>{
+                args.push(addPreFix(stock.stockCode))
             })
             //获取股票列表的简要信息
             getStockInfo(args).then(data => {
@@ -59,10 +65,10 @@ export default {
                 that.dataVal = data.slice(0, data.length-1)
 
                 that.timeOut && clearTimeout(that.timeOut);
-                that.timeOut = setTimeout(() => {
-                    console.log("重复"+ (that.num++));
-                    that.getStockDetail();
-                }, 3000);
+                // that.timeOut = setTimeout(() => {
+                //     console.log("重复"+ (that.num++));
+                //     that.getStockDetail();
+                // }, 3000);
             })
         }
     },

@@ -8,6 +8,9 @@ import router from './router'
 import store from './store'
 import filters from './filters'
 
+import db from './utils/nedb'
+Vue.prototype.$db = db.db
+
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 });

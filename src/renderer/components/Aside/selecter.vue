@@ -64,6 +64,7 @@
 <script>
 import { queryData } from '../../api/index'
 import { decodeUnicode, addPreFix } from '../../../main/util/util'
+import { addStock, getStocksCount } from '../../api/db'
 
     export default {
         data() {
@@ -84,7 +85,16 @@ import { decodeUnicode, addPreFix } from '../../../main/util/util'
         methods: {
             //查看股票当前的详细信息
             viewDetail: function(stock){
-                this.$store.state.stock.currCode = addPreFix(stock.SECU_CODE)
+                let that = this
+                that.$store.state.stock.currCode = addPreFix(stock.SECU_CODE)
+                getStocksCount.apply(that, [{stockCode: stock.SECU_CODE}]).then(function(count){
+                    console.log("存在的数量：", count);
+                    if(count < 1){
+                        addStock.apply(that, [stock.SECU_CODE]).then(function(){
+                            that.dataVal = []
+                        });
+                    }
+                });
             },
             query(key) {
                 let self = this;

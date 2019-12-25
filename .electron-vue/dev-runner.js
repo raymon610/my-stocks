@@ -81,6 +81,11 @@ function startRenderer () {
             target: 'http://gu.qq.com',
             pathRewrite: {'/sz*' : '/sz'},
             changeOrigin: true
+          },
+          '/aip':{
+            target: 'http://localhost:8888',
+            pathRewrite: {'/aip*' : '/'},
+            changeOrigin: true
           }
         }
       }
