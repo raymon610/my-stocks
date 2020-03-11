@@ -28,7 +28,7 @@ export default {
                 {
                     'SECU_NAME': '方大碳素',
                     'SECU_CODE': '600516',
-                    'CURRENT_PRICE': '12.56',
+                    'CURRENT_PRICE': '12.50',
                     'DIFF_PRICE': '-0.25',
                     'DIFF_RATE': '1.22%'
                 },
