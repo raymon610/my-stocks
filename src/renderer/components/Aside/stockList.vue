@@ -36,18 +36,18 @@ export default {
         }
     },
     mounted() {
-        var that = this;
-        //获取已有的股票
-        fetchStock.apply(this).then(function(stocks){
-            console.log("获取到已有的股票：", stocks);
-            that.getStockDetail(stocks)
-        });
-
-        test()
+        this.getStockList();
+        //test()
     },
+    
     methods: {
         getStockList: function(){
-            // fetchStock.apply(this);
+            var that = this;
+            //获取已有的股票
+            fetchStock.apply(this).then(function(stocks){
+                that.getStockDetail(stocks)
+            });
+
         },
         //查看股票当前的详细信息
         viewDetail: function(stock){
@@ -65,10 +65,9 @@ export default {
                 that.dataVal = data.slice(0, data.length-1)
 
                 that.timeOut && clearTimeout(that.timeOut);
-                // that.timeOut = setTimeout(() => {
-                //     console.log("重复"+ (that.num++));
-                //     that.getStockDetail();
-                // }, 3000);
+                that.timeOut = setTimeout(() => {
+                    that.getStockList();
+                }, 3000);
             })
         }
     },

@@ -10,10 +10,6 @@
             <el-button class="no-drag hover-color" size="mini" type="text" @click="refresh">
                 <i class="btn el-icon-refresh"></i>
             </el-button>
-
-            <!-- <div class="search no-drag">
-                <el-input size="mini" prefix-icon="el-icon-search" placeholder="搜索音乐、MV、歌单、用户"></el-input>
-            </div> -->
         </div>
         <div class="right">
             <el-button @click="minimize" class="no-drag" size="mini" type="text">

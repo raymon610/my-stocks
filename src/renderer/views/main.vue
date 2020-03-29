@@ -20,12 +20,8 @@
 <script>
     import AsideView from '../components/Aside/'
     import HeaderView from '../components/Header/'
-    import StockView from '../components/Stock/'
+    import StockView from '../components/Stock/frame'
   
-    // import FooterView from '../components/Footer/'
-    // import LoginView from '../components/Login/'
-    // import Playlist from '../components/Playlist/'
-
     export default {
         data(){
             return {
@@ -36,10 +32,6 @@
             AsideView
             ,HeaderView
             ,StockView
-             
-            // FooterView,
-            // LoginView,
-            // Playlist
         }
     }
 </script>
@@ -48,6 +40,10 @@
         display: flex;
         flex-direction: column;
         background: linear-gradient(to bottom, #efefef, #efefef);
+    }
+
+    .el-container{
+        height: 100vh;
     }
 
     .container {

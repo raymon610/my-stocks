@@ -22,14 +22,16 @@ export function getStockInfo(stocks) {
     let s = [];
     stocks = Array.isArray(stocks) ? stocks : [stocks];
     stocks.forEach(element => {
-        s.push('s_'+element);
+        s.push('s_'+element);  //增加S_前缀表价格
     });
     s = s.join(',');
     console.log("查询的参数:"+s)
-    return http.get('/getStockInfo?q='+s);
+    return http.get('/getStockInfo?q='+s+"&t="+new Date()/1);
 }
 
 export function test(){
+    //todo test
+    /*
     http.get("aip/client/test").then((response => {
         let res = response.data
         if (res) {
@@ -41,5 +43,5 @@ export function test(){
         }
       })).catch(err => {
         console.log(err)
-      });
+      });*/
 }
