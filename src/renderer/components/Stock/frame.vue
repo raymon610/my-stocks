@@ -49,13 +49,17 @@ export default {
                     dom.style.display = "none";
                 }
             }
-            
+
+            //根据图片的位置来进行位移
+            const chartDom = $(".right_side");
+            const chartRect= chartDom.getBoundingClientRect();
+
             const rootDom = $("#root");
 
             //定位只显示图表
             rootDom.style.position='relative';
-            rootDom.style.top='-253px';
-            rootDom.style.left='-193px';
+            rootDom.style.top= (0 - chartRect.top) + 'px';
+            rootDom.style.left= (0 - chartRect.left) + 'px';
 
             //隐藏相关的区域
             hide($("#left_maxcard"));  //二维码
