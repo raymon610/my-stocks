@@ -11,6 +11,8 @@
 </template>
 <script>
 import { addPreFix } from '../../../main/util/util'
+
+import ab from '../../../../service/fetch'
 export default {
     // mounted () {
     //     var _this = this
