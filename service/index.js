@@ -1,4 +1,6 @@
 var fetch  = require("./fetch_xq");
 
 
-fetch.getTheStockDays();
+// fetch.getStockList();
+// fetch.getTheStockDays();
+fetch.filterMM();
